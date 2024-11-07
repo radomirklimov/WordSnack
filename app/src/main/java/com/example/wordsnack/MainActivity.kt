@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            AddWordButton.addNewWord(viewModel)
+            AddWordButton.mainPageMix(viewModel)
 
         }
     }

@@ -36,12 +36,13 @@ object AddWordButton {
     val popUp = AddWordPopUp
 
     @Composable
-    fun mainPageMix(){
+    fun mainPageMix(viewModel: WordViewModel){
         Column(
             modifier = Modifier
                 .fillMaxSize()
         ) {
             addNewWord(viewModel)
+            displayWords(viewModel)
         }
     }
 
@@ -51,7 +52,7 @@ object AddWordButton {
 
         Column(
             modifier = Modifier
-                .background(Color.Blue)
+                .background(Color.DarkGray)
                 .fillMaxWidth()
                 .height(120.dp)
         ) {
