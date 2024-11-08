@@ -2,6 +2,7 @@ package com.example.wordsnack.ui_components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,21 +29,21 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.wordsnack.R
 import com.example.wordsnack.room.WordEntity
 import com.example.wordsnack.room.WordViewModel
 
-object AddWordButton {
-    val popUp = AddWordPopUp
+object MainPage {
 
     @Composable
-    fun mainPageMix(viewModel: WordViewModel){
+    fun mainPageMix(viewModel: WordViewModel, navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
         ) {
             addNewWord(viewModel)
-            displayWords(viewModel)
+            displayWords(viewModel, navController)
         }
     }
 
@@ -89,7 +90,7 @@ object AddWordButton {
     }
 
     @Composable
-    fun displayWords(viewModel: WordViewModel) {
+    fun displayWords(viewModel: WordViewModel, navController: NavController) {
         var words by remember { mutableStateOf<List<WordEntity>>(listOfNotNull()) }
 
         LaunchedEffect(Unit) {
@@ -108,6 +109,16 @@ object AddWordButton {
                         .height(50.dp)
                         .background(Color.LightGray)
                         .padding(10.dp)
+                        .clickable {
+                            navController.navigate(
+                                Screen.DetailScreen.createRoute(
+                                    word.word,
+                                    word.partOfSpeech,
+                                    word.transcription,
+                                    word.translation
+                                )
+                            )
+                        }
                 ) {
                     Text(text = word.word)
                     Text(text = word.translation)

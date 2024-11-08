@@ -42,6 +42,7 @@ android {
 }
 
 val room_version = "2.6.0"
+val nav_version = "2.8.0"
 
 dependencies {
 
@@ -68,4 +69,7 @@ dependencies {
 
     // Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
+
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
 }
